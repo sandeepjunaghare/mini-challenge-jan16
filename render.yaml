@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: mars-landing
+    runtime: static
+    buildCommand: echo "No build needed"
+    staticPublishPath: .
+    pullRequestPreviewsEnabled: true
