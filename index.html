@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Mars</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --mars-rust: #C1440E;
+            --mars-dust: #E07A5F;
+            --sunset-gold: #F2CC8F;
+            --terra-orange: #FF6B35;
+            --deep-canyon: #8B2500;
+            --sand-beige: #D4A574;
+            --night-black: #1A0A00;
+            --star-white: #FAF9F6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            color: var(--star-white);
+            overflow-x: hidden;
+        }
+
+        section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        h1, h2 {
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+        }
+
+        /* ═══════════════════════════════════════════════════════
+           SECTION 1: HERO — Welcome to Mars
+           ═══════════════════════════════════════════════════════ */
+        .hero {
+            background: linear-gradient(180deg,
+                var(--night-black) 0%,
+                var(--deep-canyon) 40%,
+                var(--mars-rust) 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 20%,
+                rgba(255, 107, 53, 0.3) 0%,
+                transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 8vw, 5rem);
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 60px rgba(255, 107, 53, 0.5);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            opacity: 0.9;
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .hero .cta {
+            padding: 1rem 3rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 0.2em;
+            background: transparent;
+            border: 2px solid var(--sunset-gold);
+            color: var(--sunset-gold);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .hero .cta:hover {
+            background: var(--sunset-gold);
+            color: var(--night-black);
+            box-shadow: 0 0 40px rgba(242, 204, 143, 0.5);
+        }
+
+        /* Dust Particles */
+        .dust {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .dust span {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--sand-beige);
+            border-radius: 50%;
+            opacity: 0.4;
+            animation: drift 20s infinite linear;
+        }
+
+        .dust span:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; animation-duration: 25s; }
+        .dust span:nth-child(2) { left: 20%; top: 60%; animation-delay: 2s; animation-duration: 18s; }
+        .dust span:nth-child(3) { left: 35%; top: 40%; animation-delay: 4s; animation-duration: 22s; }
+        .dust span:nth-child(4) { left: 50%; top: 80%; animation-delay: 1s; animation-duration: 20s; }
+        .dust span:nth-child(5) { left: 65%; top: 30%; animation-delay: 3s; animation-duration: 24s; }
+        .dust span:nth-child(6) { left: 80%; top: 70%; animation-delay: 5s; animation-duration: 19s; }
+        .dust span:nth-child(7) { left: 90%; top: 50%; animation-delay: 2.5s; animation-duration: 21s; }
+        .dust span:nth-child(8) { left: 5%; top: 90%; animation-delay: 1.5s; animation-duration: 23s; }
+
+        @keyframes drift {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 0.4; }
+            90% { opacity: 0.4; }
+            100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
+        }
+
+        /* ═══════════════════════════════════════════════════════
+           SECTION 2: THE TERRAIN — Explore the Surface
+           ═══════════════════════════════════════════════════════ */
+        .terrain {
+            background: linear-gradient(135deg,
+                var(--sunset-gold) 0%,
+                var(--mars-dust) 100%);
+            color: var(--night-black);
+        }
+
+        .terrain h2 {
+            font-size: clamp(1.5rem, 5vw, 3rem);
+            margin-bottom: 3rem;
+            color: var(--deep-canyon);
+        }
+
+        .terrain-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+
+        .terrain-card {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            padding: 2rem;
+            text-align: center;
+            border: 2px solid rgba(139, 37, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .terrain-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(139, 37, 0, 0.2);
+            border-color: var(--deep-canyon);
+        }
+
+        .terrain-card .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .terrain-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+            color: var(--deep-canyon);
+        }
+
+        .terrain-card p {
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+
+        .terrain > p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin-top: 1rem;
+        }
+
+        /* ═══════════════════════════════════════════════════════
+           SECTION 3: THE MISSION — Join the Colony
+           ═══════════════════════════════════════════════════════ */
+        .mission {
+            background: linear-gradient(180deg,
+                var(--terra-orange) 0%,
+                var(--mars-rust) 100%);
+            text-align: center;
+        }
+
+        .mission::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 50px,
+                    rgba(255, 255, 255, 0.03) 50px,
+                    rgba(255, 255, 255, 0.03) 100px
+                );
+            pointer-events: none;
+        }
+
+        .mission h2 {
+            font-size: clamp(1.5rem, 5vw, 3rem);
+            margin-bottom: 2rem;
+        }
+
+        .mission blockquote {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            font-style: italic;
+            max-width: 600px;
+            margin-bottom: 3rem;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+
+        .mission .join-btn {
+            padding: 1.2rem 4rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            background: var(--star-white);
+            border: none;
+            color: var(--mars-rust);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mission .join-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg,
+                transparent,
+                rgba(255, 107, 53, 0.3),
+                transparent);
+            transition: left 0.5s ease;
+        }
+
+        .mission .join-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .mission .join-btn:hover::before {
+            left: 100%;
+        }
+
+        .mission .tagline {
+            margin-top: 2rem;
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        /* ═══════════════════════════════════════════════════════
+           ANIMATIONS
+           ═══════════════════════════════════════════════════════ */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ═══════════════════════════════════════════════════════
+           RESPONSIVE
+           ═══════════════════════════════════════════════════════ */
+        @media (max-width: 768px) {
+            section {
+                padding: 3rem 1.5rem;
+            }
+
+            .terrain-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                letter-spacing: 0.15em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- SECTION 1: HERO -->
+    <section class="hero">
+        <div class="dust">
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+        </div>
+        <h1>Welcome to Mars</h1>
+        <p>The Red Planet Awaits Your Arrival</p>
+        <button class="cta" onclick="document.querySelector('.terrain').scrollIntoView({behavior: 'smooth'})">
+            Explore →
+        </button>
+    </section>
+
+    <!-- SECTION 2: THE TERRAIN -->
+    <section class="terrain">
+        <h2>The Terrain</h2>
+        <div class="terrain-grid">
+            <div class="terrain-card">
+                <div class="icon">▲</div>
+                <h3>Olympus Mons</h3>
+                <p>The tallest volcano in the solar system, rising 72,000 feet above the surface.</p>
+            </div>
+            <div class="terrain-card">
+                <div class="icon">≋</div>
+                <h3>Valles Marineris</h3>
+                <p>A canyon system stretching 2,500 miles across the Martian equator.</p>
+            </div>
+            <div class="terrain-card">
+                <div class="icon">◆</div>
+                <h3>Tharsis Rise</h3>
+                <p>A massive volcanic plateau home to three enormous shield volcanoes.</p>
+            </div>
+        </div>
+        <p>Discover the wonders of the Red Planet</p>
+    </section>
+
+    <!-- SECTION 3: THE MISSION -->
+    <section class="mission">
+        <h2>The Mission</h2>
+        <blockquote>"Humanity's next chapter begins here."</blockquote>
+        <button class="join-btn">Join the Crew</button>
+        <p class="tagline">Be part of something extraordinary</p>
+    </section>
+</body>
+</html>
